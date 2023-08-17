@@ -18,12 +18,12 @@ function stringCombination(str) {
     return [str]
   }
   const first = str[0]
-  const arr1 = stringCombination(str.slice(1))
-  const res1 = [...arr1].map(x => first + x)
-  const res2 = arr1
-  const res3 = first
+  const arr = stringCombination(str.slice(1))
+  const res1 = first
+  const res2 = [...arr].map(x => first + x)
+  const res3 = arr
 
-  return res1.concat(res2, res3)
+  return res2.concat(res3, res1)
 }
 
 // 输出： ["abc", "ac", "ab", "bc", "c", "b", "a"]
