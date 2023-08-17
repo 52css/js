@@ -12,9 +12,7 @@ function maxSlidingWindow(nums, k) {
   const result = [];
 
   for (let i = 0; i < nums.length - k + 1; i++) {
-    const arr = nums.slice(i, i + k);
-
-    result.push(Math.max(...arr));
+    result.push(Math.max(...nums.slice(i, i + k)));
   }
 
   return result;
