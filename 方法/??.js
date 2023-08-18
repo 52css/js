@@ -1,7 +1,7 @@
 /**
  * ?? 号的巧用
+ * 【代码示例】
  */
-// 数据判断
 var str1 = '0'
 var num1 = 0
 var val1 = str1 || 'hello' // 输出？
