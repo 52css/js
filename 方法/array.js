@@ -101,3 +101,10 @@ console.log(
 var arr15 = [1, 2, 3, 4, 5];
 
 console.log(arr15.at(-1));
+
+// 16. 数组交换
+var arr16 = [2, 'a'];
+
+[arr16[0], arr16[1]] = [arr16[1], arr16[0]];
+
+console.log('arr16', arr16)
