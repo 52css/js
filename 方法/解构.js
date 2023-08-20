@@ -1,7 +1,8 @@
 /**
- * 解构
+ * 解构 的巧用
+ * 常用于数组交换、自定义变量名、获取剩余值、设置默认值、多层解构
  */
-var arr = [1, 2, undefined, null, 5];
+var arr = [1, 2, undefined, null, [5]];
 var obj = {
   a: "a",
   b: "b",
@@ -13,31 +14,33 @@ var obj = {
 };
 
 // 数组交换
-([arr[1], arr[0]] = [arr[0], arr[1]]);
-console.log("1", arr);
+[arr[1], arr[0]] = [arr[0], arr[1]];
+console.log(arr);
 
-// 设置变量名
-var [a2, b2] = arr;
-var { a: a3, b: b3 } = obj;
+// 自定义变量名
+var [a, b] = arr;
+var { a: a1, b: b1 } = obj;
 
-console.log("2", a2, b2, a3, b3);
+console.log(a, b, a1, b1);
 
 // 获取剩余值
-var [a2, b2, ...restArr] = arr;
-var { a: a3, b: b3, ...restObj } = obj;
+var [a, b, ...restArr] = arr;
+var { a: a1, b: b1, ...restObj } = obj;
 
-console.log("3", restArr, restObj);
+console.log(restArr, restObj);
 
 // 设置默认值
-var { 2: c3 = "c3", 3: d3 = "d3" } = arr;
-var { c: c4 = "c4", d: d4 = "d4" } = obj;
-
-console.log("4", c3, d3, c4, d4);
+// var [, , c = "defaultC", d = "defaultD"] = arr;
+var { 2: c = "defaultC", 3: d = "defaultD" } = arr;
+var { c: c1 = "defaultC1", d: d1 = "defaultD1" } = obj;
+console.log(c, d, c1, d1);
 
 // 多层解构
-
 var {
-  e: { name },
+  4: [e],
+} = arr;
+var {
+  e: { name: e1 },
 } = obj;
 
-console.log("5", name);
+console.log(e, e1)
