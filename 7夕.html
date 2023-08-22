@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7夕抽奖</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    .list {
+      display: flex;
+      gap: 2px;
+      width: 400px;
+      flex-wrap: wrap;
+    }
+    .item {
+      list-style: none;
+      border: 1px solid gray;
+      width: 120px;
+      height: 60px;
+      background-color: rgb(255, 255, 172);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .item:nth-child(5) {
+      background-color: rgb(183, 255, 183);
+      cursor: pointer;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <ul class="list">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li id="start" class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ul>
+  <script>
+    let giftList = [
+      '项链',
+      '鲜花',
+      '手表',
+      '书籍',
+      '贴心小物',
+      '彩妆品',
+      '香水',
+      '一包辣条'
+    ]
+
+    giftList = giftList.sort(() => Math.random() - 0.5)
+
+    let list = document.querySelector('.list');
+
+    [...list.children].forEach((item, index) => {
+      let html = ''
+      if (index < 4) {
+        html = giftList[index]
+      } else if (index === 4) {
+        html = '开始'
+      } else {
+        html = giftList[index - 1]
+      }
+      item.innerText = html
+    });
+
+    const indexList = [0, 1, 2, 5, 8, 7, 6, 3]
+
+    const animate = (i) => {
+      const index = i % indexList.length
+      const prev = index === 0 ? indexList.length - 1 : index - 1
+      document.querySelector('.list').children[indexList[prev]].style.backgroundColor = 'rgb(255, 255, 172)';
+      document.querySelector('.list').children[indexList[index]].style.backgroundColor = 'red'
+    }
+
+    document.querySelector('#start').onclick = () => {
+      const times = indexList.length * 3
+      for(let i = 0; i < times; i ++) {
+        setTimeout(() => {
+          animate(i)
+
+          if (i === times - 1) {
+            // 寻找中的辣条
+            const endIndex = indexList.map(x => list.children[x].innerText).findIndex(item => item === '一包辣条')
+
+            for (let j = 0; j <= endIndex; j ++) {
+              setTimeout(() => {
+                animate(j)
+              }, 100 * (j + 1))
+            }
+          }
+        }, 100 * i)
+      }
+    }
+
+  </script>
+</body>
+</html>
