@@ -26,14 +26,26 @@ function debounce (fn, time) {
 定义：规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。
 
 ```ts
-function throttle(fn, time) {
+function throttle(func, delay) {
   let timer = null;
-  return function () {
-    if (timer) return;
-    timer = setTimeout(() => {
-      fn.apply(this, arguments);
-      timer = null;
-    }, time);
+  let lastTime = 0;
+ 
+  return function() {
+    const context = this;
+    const args = arguments;
+    const now = new Date().getTime();
+ 
+    if (now - lastTime >= delay) {
+      clearTimeout(timer);
+      func.apply(context, args);
+      lastTime = now;
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        func.apply(context, args);
+        lastTime = now;
+      }, delay);
+    }
   };
 }
 ```
