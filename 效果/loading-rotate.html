@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    .loading {
+      /* 设置全屏 */
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* 设置黑色 */
+      background-color: rgba(0, 0, 0, .65);
+      backdrop-filter: blur(4px);
+      /* 设置居中 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .loading::before {
+      content: '';
+      width: 24px;
+      height: 24px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      border-right-color: transparent;
+
+      animation: infinite 0.5s linear rotate;
+    }
+    .loading::after {
+      content: 'loading...';
+      color: #fff;
+      font-size: 12px;
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading"></div>
+</body>
+</html>
