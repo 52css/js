@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义计数器小技巧！CSS 实现长按点赞累积动画</title>
+    <style>
+      @property --t {
+        syntax: "<integer>";
+        inherits: false;
+        initial-value: 0;
+      }
+
+      /*
+      https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style
+      @counter-style counter-style-name {
+        system: 计数系统
+        symbols: 计数符号
+        additive-symbols: 附加符号
+        negative: 负数符号
+        prefix: 前缀
+        suffix: 后缀
+        range: 范围
+        pad: 补全
+        speak-as: 如何阅读
+        fallback: 备份计数规则
+      } */
+
+      @counter-style 太棒了 {
+        system: cyclic;
+        symbols: "太棒了！！！";
+        /* range: 51 infinite; */
+      }
+      @counter-style 加油 {
+        system: cyclic;
+        symbols: "加油！！";
+        range: 0 50;
+        fallback: 太棒了;
+      }
+      @counter-style 鼓励 {
+        system: cyclic;
+        symbols: "鼓励！";
+        range: 0 20;
+        fallback: 加油;
+      }
+      body {
+        display: grid;
+        place-content: center;
+        height: 100vh;
+        margin: 0;
+        gap: 10px;
+      }
+      .like {
+        position: relative;
+      }
+      .like::after {
+        position: absolute;
+        bottom: 100%;
+        width: max-content;
+        font-size: 2rem;
+        font-style: italic;
+        font-weight: bolder;
+        background-image: linear-gradient(#ffcf02, #ff7352);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        /* counter-reset 和 content 实现 伪元素的var变量 */
+        counter-reset: time var(--t);
+        content: "x" counter(time) counter(time, 鼓励);
+        animation: count 100s steps(999) forwards;
+        animation-play-state: paused;
+        transform: translateY(100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s 0.3s, 0s 0.6s transform;
+      }
+      @keyframes count {
+        to {
+          --t: 999;
+        }
+      }
+      .like:active::after {
+        animation-play-state: running;
+        visibility: visible;
+        opacity: 1;
+        transition: 0.3s;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <button class="like">长按我试试~</button>
+  </body>
+</html>
