@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotlight Effect on Links</title>
+    <style>
+      :root {
+        font-size: 15px;
+        --lighting-size: 300px;
+        --lighting-color: #9333ea;
+        --lighting-highlight-color: #d8b4fe;
+      }
+
+      body {
+        --x: 0px;
+        --y: 0px;
+
+        max-width: 600px;
+        margin: 80px auto;
+
+        font-size: 1.5rem;
+        font-family: Helvetica;
+        background-color: #020617;
+        color: #94a3b8;
+      }
+
+      div {
+        padding: 40px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #9333ea;
+        display: inline-block;
+
+        background-image: radial-gradient(
+          var(--lighting-highlight-color),
+          var(--lighting-color),
+          var(--lighting-color)
+        );
+        background-size: var(--lighting-size) var(--lighting-size);
+        background-repeat: no-repeat;
+
+        background-position-x: calc(
+          var(--x) - var(--positionX) - calc(var(--lighting-size) / 2)
+        );
+        background-position-y: calc(
+          var(--y) - var(--positionY) - calc(var(--lighting-size) / 2)
+        );
+
+        background-color: var(--lighting-color);
+
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid
+      <a href="#">repudiandae</a> minima enim deserunt, nihil, reiciendis
+      explicabo magnam animi officiis fugit, labore ea.
+      <a href="#">Laboriosam</a>, consectetur. Fugit ex cum dolorem atque modi.
+    </div>
+
+    <ul>
+      <li>
+        <a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+        <p>
+          Molestiae hic, similique saepe corrupti minus molestias unde quasi
+          veritatis id possimus debitis soluta explicabo est. Incidunt
+          distinctio nam ut assumenda voluptas.
+        </p>
+      </li>
+      <li>
+        <a href="#"
+          >Ducimus ab sint tempore itaque dolorum odio porro, officiis
+          voluptates saepe vero provident.</a
+        >
+        <p>
+          Maxime, reprehenderit cupiditate. Voluptatem eius possimus maiores
+          tempora labore quam consequatur ab explicabo debitis nam, repudiandae
+          sed.
+        </p>
+      </li>
+    </ul>
+
+    <script>
+      document.querySelector("body").addEventListener("mousemove", (e) => {
+        e.currentTarget.style.setProperty("--x", `${e.clientX}px`);
+        e.currentTarget.style.setProperty("--y", `${e.clientY}px`);
+      });
+
+      function setLinksPositions() {
+        document.querySelectorAll("a").forEach((a) => {
+          const bounding = a.getBoundingClientRect();
+
+          a.style.setProperty("--positionX", `${bounding.x}px`);
+          a.style.setProperty("--positionY", `${bounding.y}px`);
+        });
+      }
+
+      window.addEventListener("load", setLinksPositions);
+      window.addEventListener("resize", setLinksPositions);
+    </script>
+  </body>
+</html>
