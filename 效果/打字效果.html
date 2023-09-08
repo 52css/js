@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>打字效果</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: rgb(255, 255, 219);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="relative flex flex-1 flex-col justify-center px-5 pt-8 text-[#FE7600] dark:text-[#D292FF] md:px-6 md:py-[22px] lg:px-8"">
+      <div id="parent" class="absolute left-0 top-0 transition-opacity duration-300">
+        <span id="typing" class="inline-block text-7xl font-circle delay-[300ms] transition-transform duration-300"><span>&hairsp;</span>●</span>
+      </div>
+    </div>
+    <script>
+      const parent = document.getElementById("parent");
+      const typing = document.getElementById("typing");
+      const text = 'for hiring a store associate'
+      text.split(' ').forEach((txt, txtIndex, arr) => {
+        // setTimeout(() => {
+          const span = document.createElement("span");
+          span.classList.add("inline");
+          span.classList.add("transition-opacity");
+          span.classList.add(`duration-${txtIndex * 3}00`);
+          span.classList.add("text-7xl");
+          span.innerHTML = (txtIndex === 0 ? '' : ' ') + txt;
+          parent.insertBefore(span, typing)
+
+//           let delay = 0
+// document.querySelectorAll('span').forEach((span, index) => {
+//   delay += 0.1
+  
+//   if (index === 6) delay += 0.3
+  
+//   span.style.setProperty('--delay', `${delay}s`)
+// })
+
+          if (txtIndex === arr.length - 1) {
+            typing.classList.add('scale-0')
+          }
+        // }, txtIndex * 300)
+      })
+    </script>
+  </body>
+</html>
