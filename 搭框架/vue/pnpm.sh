@@ -8,7 +8,7 @@ set -e
 
 # 安装eslint
 cd vite-project
-npm init @eslint/config
+# npm init @eslint/config
 # npm pkg set scripts.lint="eslint --ext .ts,.vue,.js, --ignore-path .gitignore --fix src"
 
 # 安装prettier
@@ -17,4 +17,5 @@ npm init @eslint/config
 # npm pkg set scripts.format="prettier --write"
 
 # 安装ESLint + Prettier
-# pnpm add eslint-config-prettier eslint-plugin-prettier -D
+#pnpm add eslint-config-prettier eslint-plugin-prettier -D
+# echo "module.exports = {\n  \"env\": {\n    \"browser\": true,\n    \"es2021\": true\n  },\n  \"extends\": [\n    \"eslint:recommended\",\n    \"plugin:@typescript-eslint/recommended\",\n    \"plugin:vue/vue3-essential\",\n    \"plugin:prettier/recommended\"\n  ],\n  \"overrides\": [\n    {\n      \"env\": {\n        \"node\": true\n      },\n      \"files\": [\".eslintrc.{js,cjs}\"],\n      \"parserOptions\": {\n        \"sourceType\": \"script\"\n      }\n    }\n  ],\n  \"parserOptions\": {\n    \"ecmaVersion\": \"latest\",\n    \"parser\": \"@typescript-eslint/parser\",\n    \"sourceType\": \"module\"\n  },\n  \"plugins\": [\n    \"@typescript-eslint\",\n    \"vue\",\n    \"prettier\"\n  ],\n  \"rules\": {\n    \"prettier/prettier\": \"error\",\n    \"arrow-body-style\": \"off\",\n    \"prefer-arrow-callback\": \"off\"\n  }\n}"> .eslintrc.cjs
