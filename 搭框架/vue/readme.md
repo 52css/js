@@ -6,9 +6,45 @@
 pnpm create vite my-vue-app --template vue-ts
 ```
 
-## 2. Linter / Formatter
+## 2. Alias
 
-### 2.1 安装eslint
+安装依赖
+
+```shell
+pnpm add -D @types/node
+```
+
+在`vite.config.js`的`defineConfig`增加
+
+```js
+// 头部饮用
+import path from 'path'
+
+// 增加到defineConfig下
+{
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
+}
+```
+
+在`tsconfig.json`的`compilerOptions`增加
+
+```json
+{
+  "paths":{
+     "@/*": ["./src/*"],
+   },
+}
+```
+
+
+
+## 3. Linter / Formatter
+
+### 3.1 安装eslint
 
 ```shell
 npm init @eslint/config
@@ -67,7 +103,7 @@ module.exports = {
 }
 ```
 
-### 2.2. 增加prettier
+### 3.2. 增加prettier
 
 ```shell
 yarn add prettier -D
@@ -97,7 +133,7 @@ module.exports = {
 }
 ```
 
-### 2.3. ESLint + Prettier
+### 3.3. ESLint + Prettier
 
 在eslint校验中加入Prettier格式化，安装依赖
 
@@ -149,7 +185,7 @@ module.exports = {
 
 ```
 
-### 2.4 给vscode增加格式化
+### 3.4 给vscode增加格式化
 
 然后在 `.vscode/settings.json` 添加相关配置。
 
@@ -168,9 +204,9 @@ module.exports = {
 }
 ```
 
-## 3. Husky + lint-staged
+## 4. Husky + lint-staged
 
-### 3.1 安装husky
+### 4.1 安装husky
 
 ```shell
 pnpm add husky -D
@@ -184,7 +220,7 @@ npm pkg set scripts.prepare="husky install"
 npm run prepare
 ```
 
-### 3.2 安装lint-staged
+### 4.2 安装lint-staged
 
 ```shell
 pnpm add lint-staged -D
@@ -202,36 +238,6 @@ pnpm add lint-staged -D
   }
 }
 ```
-
-## 4. @
-
-在`vite.config.js`的`defineConfig`增加
-
-```js
-// 头部饮用
-import path from 'path'
-
-// 增加到defineConfig下
-{
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
-  },
-}
-```
-
-在`tsconfig.json`的`compilerOptions`增加
-
-```json
-{
-  "paths":{
-     "@/*": ["./src/*"],
-   },
-}
-```
-
-
 
 ## 5. SvgIcon
 
