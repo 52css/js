@@ -203,12 +203,42 @@ pnpm add lint-staged -D
 }
 ```
 
-## 4. SvgIcon
+## 4. @
 
-## 5. AutoImport
+在`vite.config.js`的`defineConfig`增加
 
-## 6. Router
+```js
+// 头部饮用
+import path from 'path'
 
-## 7. Pinia
+// 增加到defineConfig下
+{
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
+}
+```
 
-## 8. Commitlint
+在`tsconfig.json`的`compilerOptions`增加
+
+```json
+{
+  "paths":{
+     "@/*": ["./src/*"],
+   },
+}
+```
+
+
+
+## 5. SvgIcon
+
+## 6. AutoImport
+
+## 7. Router
+
+## 8. Pinia
+
+## 9. Commitlint
