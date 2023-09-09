@@ -12,7 +12,7 @@ pnpm create vite
 pnpm create vite my-vue-app --template vue-ts
 ```
 
-## 3. 增加eslint
+## 2. 增加eslint
 
 ```shell
 npm init @eslint/config
@@ -71,7 +71,7 @@ module.exports = {
 }
 ```
 
-## 4. 增加prettier
+## 3. 增加prettier
 
 ```shell
 yarn add prettier -D
@@ -101,7 +101,7 @@ module.exports = {
 }
 ```
 
-## 5. ESLint + Prettier
+## 4. ESLint + Prettier
 
 在eslint校验中加入Prettier格式化，安装依赖
 
@@ -153,7 +153,7 @@ module.exports = {
 
 ```
 
-## 6. Husky + lint-staged
+## 5. Husky + lint-staged
 
 ```shell
 yarn add husky -D
@@ -167,5 +167,38 @@ npm pkg set scripts.prepare="husky install"
 npm run prepare
 ```
 
+```shell
+pnpm add lint-staged -D
+```
 
+然后在 `package.json` 添加相关配置。
 
+```json
+{
+  "lint-staged": {
+    "*.{ts,vue}": [
+      "npm run lint",
+      "prettier --write"
+    ]
+  }
+}
+```
+
+## 6. 给vscode增加配置，自动保存格式化
+
+然后在 `.vscode/settings.json` 添加相关配置。
+
+```json
+{
+  "editor.tabSize": 2, // Tab 的大小 2个空格
+  "editor.formatOnSave": true, // 保存是格式化
+  "prettier.singleQuote": true, // 单引号
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```
