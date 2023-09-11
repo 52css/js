@@ -220,6 +220,15 @@ npm pkg set scripts.prepare="husky install"
 npm run prepare
 ```
 
+运行命令后会在项目根目录创建 .husky 文件夹。
+现在给 Husky 添加一个 Hook
+
+```shell
+npx husky add .husky/pre-commit "npm run lint"
+```
+
+
+
 ### 4.2 安装lint-staged
 
 ```shell
