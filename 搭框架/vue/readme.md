@@ -118,8 +118,9 @@ module.exports = {
   useTabs: false,
   singleQuote: true,
   semi: false,
-  trailingComma: "none",
-  bracketSpacing: true
+  trailingComma: 'es5',
+  bracketSpacing: true,
+  endOfLine: 'auto'
 }
 ```
 
@@ -246,9 +247,218 @@ pnpm add lint-staged -D
 }
 ```
 
-## 5. SvgIcon
+## 5.AutoImport
 
-## 6. AutoImport
+**unplugin-auto-import**：为 Vite、Webpack、Rollup 和 esbuild **按需自动导入 API**。支持 TypeScript。
+
+**unplugin-vue-components**：Vue 的**按需组件自动导入**。
+
+### 5.1 安装
+
+```shell
+pnpm add -D unplugin-auto-import
+pnpm add -D unplugin-vue-components
+```
+
+### 5.2 修改vite版本
+
+修改 vite.config.ts 文件内容，在此以 ElementPlusResolver 为例，其他组件类同。
+
+```tsx
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+AutoImport({
+  imports: ["vue", "vue-router"],
+  resolvers: [ElementPlusResolver()],
+  dts: "src/types/auto-import.d.ts",
+  eslintrc: {
+    enabled: true
+  },
+}),
+Components({
+  resolvers: [ElementPlusResolver()],
+  dts: 'src/types/components.d.ts'
+}),
+
+```
+
+eslintrc 中 enabled 设置为 true，保存之后会随即在跟目录下生成 .eslintrc-auto-import.json 文件。
+
+```json
+{
+  "globals": {
+    "EffectScope": true,
+    "computed": true,
+    "createApp": true,
+    "customRef": true,
+    "defineAsyncComponent": true,
+    "defineComponent": true,
+    "effectScope": true,
+    "getCurrentInstance": true,
+    "getCurrentScope": true,
+    "h": true,
+    "inject": true,
+    "isProxy": true,
+    "isReactive": true,
+    "isReadonly": true,
+    "isRef": true,
+    "markRaw": true,
+    "nextTick": true,
+    "onActivated": true,
+    "onBeforeMount": true,
+    "onBeforeRouteLeave": true,
+    "onBeforeRouteUpdate": true,
+    "onBeforeUnmount": true,
+    "onBeforeUpdate": true,
+    "onDeactivated": true,
+    "onErrorCaptured": true,
+    "onMounted": true,
+    "onRenderTracked": true,
+    "onRenderTriggered": true,
+    "onScopeDispose": true,
+    "onServerPrefetch": true,
+    "onUnmounted": true,
+    "onUpdated": true,
+    "provide": true,
+    "reactive": true,
+    "readonly": true,
+    "ref": true,
+    "resolveComponent": true,
+    "resolveDirective": true,
+    "shallowReactive": true,
+    "shallowReadonly": true,
+    "shallowRef": true,
+    "toRaw": true,
+    "toRef": true,
+    "toRefs": true,
+    "triggerRef": true,
+    "unref": true,
+    "useAttrs": true,
+    "useCssModule": true,
+    "useCssVars": true,
+    "useLink": true,
+    "useRoute": true,
+    "useRouter": true,
+    "useSlots": true,
+    "watch": true,
+    "watchEffect": true,
+    "watchPostEffect": true,
+    "watchSyncEffect": true
+  }
+}
+```
+
+### 5.3 .eslintrc.cjs
+
+然后将这个文件引入 .eslintrc.cjs
+
+```tsx
+extends: [ 
+    // ...
+    './.eslintrc-auto-import.json' 
+]
+```
+
+## 6. SvgIcon
+
+### 安装插件
+
+```shell
+pnpm add vite-plugin-svg-icons -D
+```
+
+Vite.config.ts 中配置
+
+```ts
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
+
+export default () => {
+  return {
+    plugins: [
+      createSvgIconsPlugin({
+        // 指定需要缓存的图标文件夹
+        iconDirs: [path.resolve(process.cwd(), 'src/icons')],
+        // 指定symbolId格式
+        symbolId: 'icon-[dir]-[name]',
+
+        /**
+         * 自定义插入位置
+         * @default: body-last
+         */
+        // inject?: 'body-last' | 'body-first'
+
+        /**
+         * custom dom id
+         * @default: __svg__icons__dom__
+         */
+        // customDomId: '__svg__icons__dom__',
+      }),
+    ],
+  }
+}
+```
+
+在 `src/main.ts`内引入注册脚本
+
+```ts
+import 'virtual:svg-icons-register'
+```
+
+在 `src/components/svg-icon.vue`
+
+```vue
+<script lang="ts" setup>
+export interface SvgIconProps {
+  prefix?: string
+  name: string
+  size?: string
+}
+
+const props = withDefaults(defineProps<SvgIconProps>(), {
+  prefix: 'icon',
+  size: '1em'
+})
+
+const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+</script>
+
+<template>
+  <svg
+    aria-hidden="true"
+    class="svg-icon"
+    :width="props.size"
+    :height="props.size"
+  >
+    <use :xlink:href="symbolId" />
+  </svg>
+</template>
+
+```
+
+在 icons 目录增加
+
+```
+# src/icons
+- icon1.svg
+- icon2.svg
+- icon3.svg
+```
+
+### 页面使用
+
+```vue
+<svg-icon name="icon1" />
+```
+
+### 获取iconsNames
+
+```ts
+import iconNames from 'virtual:svg-icons-names'
+// => ['icon-icon1','icon-icon2','icon-icon3']
+```
 
 ## 7. Router
 

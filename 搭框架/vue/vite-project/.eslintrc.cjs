@@ -7,7 +7,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-essential',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    './.eslintrc-auto-import.json'
   ],
   overrides: [
     {
@@ -32,3 +33,4 @@ module.exports = {
     'prefer-arrow-callback': 'off'
   }
 }
+

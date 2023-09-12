@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
+const a = ref('123')
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  显示 {{ a }}
   <HelloWorld msg="Vite + Vue" />
 </template>
 
