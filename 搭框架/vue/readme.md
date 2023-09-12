@@ -172,7 +172,7 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint", 
+    "@typescript-eslint",
     "vue",
 +    "prettier"
   ],
@@ -226,8 +226,6 @@ npm run prepare
 ```shell
 npx husky add .husky/pre-commit "npm run lint"
 ```
-
-
 
 ### 4.2 安装lint-staged
 
