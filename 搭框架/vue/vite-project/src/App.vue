@@ -5,6 +5,7 @@ const a = ref('123')
 
 <template>
   <div>
+    <svg-icon name="fav" />
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>

@@ -363,11 +363,13 @@ extends: [
 
 ## 6. SvgIcon
 
-### 安装插件
+### 6.1 安装插件
 
 ```shell
 pnpm add vite-plugin-svg-icons -D
 ```
+
+### 6.2 修改vite内容
 
 Vite.config.ts 中配置
 
@@ -401,11 +403,15 @@ export default () => {
 }
 ```
 
+### 6.3 修改main内容
+
 在 `src/main.ts`内引入注册脚本
 
 ```ts
 import 'virtual:svg-icons-register'
 ```
+
+### 6.4 增加svg-icon组件
 
 在 `src/components/svg-icon.vue`
 
@@ -422,7 +428,7 @@ const props = withDefaults(defineProps<SvgIconProps>(), {
   size: '1em'
 })
 
-const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+const symbolId = computed(() => '#' + props.prefix + '-' + props.name)
 </script>
 
 <template>
@@ -438,6 +444,8 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 
 ```
 
+### 其他
+
 在 icons 目录增加
 
 ```
@@ -447,13 +455,13 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 - icon3.svg
 ```
 
-### 页面使用
+页面使用
 
 ```vue
 <svg-icon name="icon1" />
 ```
 
-### 获取iconsNames
+获取iconsNames
 
 ```ts
 import iconNames from 'virtual:svg-icons-names'

@@ -45,14 +45,24 @@ cd vite-project
 # npm pkg set lint-staged["*.{ts,vue}"][0]="npm run lint"
 # npm pkg set lint-staged["*.{ts,vue}"][1]="prettier --write"
 
-echo "5.AutoImport"
-echo "5.1 安装依赖包"
-pnpm add -D unplugin-auto-import
-pnpm add -D unplugin-vue-components
-echo "5.2 修改vite内容"
-echo "import { defineConfig } from 'vite';\nimport vue from '@vitejs/plugin-vue';\nimport path from 'path';\nimport AutoImport from 'unplugin-auto-import/vite';\nimport Components from 'unplugin-vue-components/vite';\nimport { ElementPlusResolver } from 'unplugin-vue-components/resolvers';\n\n// https://vitejs.dev/config/\nexport default defineConfig({\n  resolve: {\n    alias: {\n      '@': path.resolve(__dirname, 'src'),\n    },\n  },\n  plugins: [\n    vue(),\n    AutoImport({\n      imports: ['vue', 'vue-router'],\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/auto-import.d.ts',\n      eslintrc: {\n        enabled: true,\n      },\n    }),\n    Components({\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/components.d.ts',\n    }),\n  ],\n});\n" > vite.config.ts
-echo "5.3 修改.eslintrc.cjs"
-echo "module.exports = {\n  env: {\n    browser: true,\n    es2021: true\n  },\n  extends: [\n    'eslint:recommended',\n    'plugin:@typescript-eslint/recommended',\n    'plugin:vue/vue3-essential',\n    'plugin:prettier/recommended',\n    './.eslintrc-auto-import.json'\n  ],\n  overrides: [\n    {\n      env: {\n        node: true\n      },\n      files: ['.eslintrc.{js,cjs}'],\n      parserOptions: {\n        sourceType: 'script'\n      }\n    }\n  ],\n  parserOptions: {\n    ecmaVersion: 'latest',\n    parser: '@typescript-eslint/parser',\n    sourceType: 'module'\n  },\n  plugins: ['@typescript-eslint', 'vue', 'prettier'],\n  rules: {\n    'prettier/prettier': 'error',\n    'arrow-body-style': 'off',\n    'prefer-arrow-callback': 'off'\n  }\n}\n" > .eslintrc.cjs
+# echo "5.AutoImport"
+# echo "5.1 安装依赖包"
+# pnpm add -D unplugin-auto-import
+# pnpm add -D unplugin-vue-components
+# echo "5.2 修改vite内容"
+# echo "import { defineConfig } from 'vite';\nimport vue from '@vitejs/plugin-vue';\nimport path from 'path';\nimport AutoImport from 'unplugin-auto-import/vite';\nimport Components from 'unplugin-vue-components/vite';\nimport { ElementPlusResolver } from 'unplugin-vue-components/resolvers';\n\n// https://vitejs.dev/config/\nexport default defineConfig({\n  resolve: {\n    alias: {\n      '@': path.resolve(__dirname, 'src'),\n    },\n  },\n  plugins: [\n    vue(),\n    AutoImport({\n      imports: ['vue', 'vue-router'],\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/auto-import.d.ts',\n      eslintrc: {\n        enabled: true,\n      },\n    }),\n    Components({\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/components.d.ts',\n    }),\n  ],\n});\n" > vite.config.ts
+# echo "5.3 修改.eslintrc.cjs"
+# echo "module.exports = {\n  env: {\n    browser: true,\n    es2021: true\n  },\n  extends: [\n    'eslint:recommended',\n    'plugin:@typescript-eslint/recommended',\n    'plugin:vue/vue3-essential',\n    'plugin:prettier/recommended',\n    './.eslintrc-auto-import.json'\n  ],\n  overrides: [\n    {\n      env: {\n        node: true\n      },\n      files: ['.eslintrc.{js,cjs}'],\n      parserOptions: {\n        sourceType: 'script'\n      }\n    }\n  ],\n  parserOptions: {\n    ecmaVersion: 'latest',\n    parser: '@typescript-eslint/parser',\n    sourceType: 'module'\n  },\n  plugins: ['@typescript-eslint', 'vue', 'prettier'],\n  rules: {\n    'prettier/prettier': 'error',\n    'arrow-body-style': 'off',\n    'prefer-arrow-callback': 'off'\n  }\n}\n" > .eslintrc.cjs
+
+echo "6.SvgIcon"
+echo "6.1 安装依赖包"
+pnpm add vite-plugin-svg-icons -D
+echo "6.2 修改vite内容"
+echo "import { defineConfig } from 'vite'\nimport vue from '@vitejs/plugin-vue'\nimport path from 'path'\nimport AutoImport from 'unplugin-auto-import/vite'\nimport Components from 'unplugin-vue-components/vite'\nimport { ElementPlusResolver } from 'unplugin-vue-components/resolvers'\nimport { createSvgIconsPlugin } from 'vite-plugin-svg-icons'\n\n// https://vitejs.dev/config/\nexport default defineConfig({\n  resolve: {\n    alias: {\n      '@': path.resolve(__dirname, 'src')\n    }\n  },\n  plugins: [\n    vue(),\n    AutoImport({\n      imports: ['vue', 'vue-router'],\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/auto-import.d.ts',\n      eslintrc: {\n        enabled: true\n      }\n    }),\n    Components({\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/components.d.ts'\n    }),\n    createSvgIconsPlugin({\n      // 指定需要缓存的图标文件夹\n      iconDirs: [path.resolve(process.cwd(), 'src/icons')],\n      // 指定symbolId格式\n      symbolId: 'icon-[dir]-[name]'\n    })\n  ]\n})\n" > vite.config.ts
+echo "6.3 修改main内容"
+echo "import { createApp } from 'vue'\nimport './style.css'\nimport App from './App.vue'\nimport 'virtual:svg-icons-register'\n\ncreateApp(App).mount('#app')\n" > src/main.ts
+echo "6.4 增加svg-icon组件"
+echo "<script lang=\"ts\" setup>\nexport interface SvgIconProps {\n  prefix?: string\n  name: string\n  size?: string\n}\n\nconst props = withDefaults(defineProps<SvgIconProps>(), {\n  prefix: 'icon',\n  size: '1em'\n})\n\nconst symbolId = computed(() => '#' + props.prefix + '-' + props.name)\n</script>\n\n<template>\n  <svg\n    aria-hidden=\"true\"\n    class=\"svg-icon\"\n    :width=\"props.size\"\n    :height=\"props.size\"\n  >\n    <use :xlink:href=\"symbolId\" />\n  </svg>\n</template>" > src/components/svg-icon.vue
 
 # 启动
 pnpm run dev
