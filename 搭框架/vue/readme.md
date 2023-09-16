@@ -468,13 +468,13 @@ import iconNames from 'virtual:svg-icons-names'
 // => ['icon-icon1','icon-icon2','icon-icon3']
 ```
 
-## 7. AutoRouter(插件)
+## 7. Router(插件)
 
 ### 7.1 安装路由
 
 ```shell
 pnpm add vue-router@4
-pnpm add unplugin-vue-router -D
++pnpm add unplugin-vue-router -D
 ```
 
 ### 7.2 增加`src/route.ts`内容如下
