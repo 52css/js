@@ -3,6 +3,12 @@
 </script>
 
 <template>
+  <div style="display: flex; gap: 20px">
+    <router-link to="/">index</router-link>
+    <router-link to="/about">about</router-link>
+    <router-link to="/posts/123">posts/123</router-link>
+    <router-link to="/posts/456">posts/456</router-link>
+  </div>
   <router-view />
 </template>
 

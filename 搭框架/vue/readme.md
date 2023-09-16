@@ -468,94 +468,27 @@ import iconNames from 'virtual:svg-icons-names'
 // => ['icon-icon1','icon-icon2','icon-icon3']
 ```
 
-## 7. AutoRouter
+## 7. AutoRouter(插件)
 
 ### 7.1 安装路由
 
 ```shell
 pnpm add vue-router@4
+pnpm add unplugin-vue-router -D
 ```
 
 ### 7.2 增加`src/route.ts`内容如下
 
 ```ts
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-
-const routeFiles = import.meta.glob('@/views/**/*.vue')
-const autoRoutes: RouteRecordRaw[] = []
-const fileNameReplace = (fileName: string) =>
-  fileName.replace(/\[([\w\-_]*)\]/g, (_, w) => ':' + w)
-export interface PathToChildren {
-  [key: string]: RouteRecordRaw[]
-}
-const pathToChildren: PathToChildren = {}
-
-for (const filePath in routeFiles) {
-  const result = filePath.slice(11, -4)
-  const fileNameList = result.split('/')
-  const fileNameLen = fileNameList.length
-  let relativePath = ''
-  let routersParent = autoRoutes
-  const children: RouteRecordRaw[] = []
-  const path = fileNameList.map((x) => fileNameReplace(x)).join('/')
-
-  for (let i = 0; i < fileNameLen; i++) {
-    const rightIndex = fileNameLen - 1 - i
-    const left = fileNameList
-      .slice(0, rightIndex)
-      .map((x) => fileNameReplace(x))
-      .join('/')
-    const fileName = fileNameReplace(fileNameList[rightIndex])
-
-    if (i === 0) {
-      relativePath = fileName
-    } else {
-      relativePath = fileName + '/' + relativePath
-    }
-
-    if (i === fileNameList.length - 1) {
-      relativePath = '/' + relativePath
-    }
-
-    if (routeFiles['/src/views/' + left + '.vue']) {
-      routersParent = pathToChildren[left]
-      break
-    }
-  }
-
-  pathToChildren[path] = children
-
-  routersParent.push({
-    path: relativePath,
-    component: routeFiles[filePath],
-    children,
-  })
-}
-
-// 增加重定向
-interface RedirectMap {
-  [key: string]: string
-}
-const redirectMap: RedirectMap = {
-  '/': '/index',
-}
-
-Object.keys(redirectMap).forEach((path) => {
-  const redirect = redirectMap[path]
-  autoRoutes.push({
-    path,
-    redirect,
-  })
-})
+import { createRouter, createWebHistory } from 'vue-router/auto'
+import { routes } from 'vue-router/auto/routes'
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: autoRoutes,
+  routes
 })
 
 export default router
-
-
 ```
 
 ### 7.3 修改src/main.ts
@@ -573,7 +506,59 @@ createApp(App)
 
 ```
 
+### 7.4 修改vite.config.ts
 
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
++import VueRouter from 'unplugin-vue-router/vite'
++import { VueRouterAutoImports } from 'unplugin-vue-router'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
+  plugins: [
+    vue(),
+    AutoImport({
+      imports: [
+        'vue', 
+        'vue-router', 
++        VueRouterAutoImports
+      ],
+      resolvers: [ElementPlusResolver()],
+      dts: 'src/types/auto-import.d.ts',
+      eslintrc: {
+        enabled: true
+      }
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+      dts: 'src/types/components.d.ts'
+    }),
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [path.resolve(process.cwd(), 'src/icons')],
+      // 指定symbolId格式
+      symbolId: 'icon-[dir]-[name]'
+    }),
++    VueRouter({
++      /* options */
++      routesFolder: 'src/views',
++      dts: 'src/types/typed-router.d.ts'
++    })
+  ]
+})
+
+```
 
 
 

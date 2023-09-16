@@ -5,6 +5,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import VueRouter from 'unplugin-vue-router/vite'
+import { VueRouterAutoImports } from 'unplugin-vue-router'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,7 +18,7 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      imports: ['vue', 'vue-router'],
+      imports: ['vue', 'vue-router', VueRouterAutoImports],
       resolvers: [ElementPlusResolver()],
       dts: 'src/types/auto-import.d.ts',
       eslintrc: {
@@ -32,7 +34,11 @@ export default defineConfig({
       iconDirs: [path.resolve(process.cwd(), 'src/icons')],
       // 指定symbolId格式
       symbolId: 'icon-[dir]-[name]'
+    }),
+    VueRouter({
+      /* options */
+      routesFolder: 'src/views',
+      dts: 'src/types/typed-router.d.ts'
     })
   ]
 })
-
