@@ -10,6 +10,8 @@
     <router-link to="/posts/456">posts/456</router-link>
   </div>
   <router-view />
+  <el-button type="primary">this is buttons</el-button>
+  <i-ep-edit />
 </template>
 
 <style scoped>

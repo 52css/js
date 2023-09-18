@@ -72,16 +72,25 @@ cd vite-project
 # echo "7.3 写入src/main.ts"
 # echo "import { createApp } from 'vue'\nimport './style.css'\nimport App from './App.vue'\nimport 'virtual:svg-icons-register'\nimport router from './router'\n\ncreateApp(App).use(router).mount('#app')\n" > src/main.ts
 
-echo "7.AutoRouter-new"
-echo "7.1 安装依赖包"
-pnpm add vue-router@4
-pnpm add unplugin-vue-router -D
-echo "7.2 写入src/router.ts"
-echo "import { createRouter, createWebHistory } from 'vue-router/auto'\nimport { routes } from 'vue-router/auto/routes'\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n})\n\nexport default router\n" > src/router.ts
-echo "7.3 写入src/main.ts"
-echo "import { createApp } from 'vue'\nimport './style.css'\nimport App from './App.vue'\nimport 'virtual:svg-icons-register'\nimport router from './router'\n\ncreateApp(App).use(router).mount('#app')\n" > src/main.ts
-echo "7.4 写入vite.config.ts"
-echo "import { defineConfig } from 'vite'\nimport vue from '@vitejs/plugin-vue'\nimport path from 'path'\nimport AutoImport from 'unplugin-auto-import/vite'\nimport Components from 'unplugin-vue-components/vite'\nimport { ElementPlusResolver } from 'unplugin-vue-components/resolvers'\nimport { createSvgIconsPlugin } from 'vite-plugin-svg-icons'\nimport VueRouter from 'unplugin-vue-router/vite'\nimport { VueRouterAutoImports } from 'unplugin-vue-router'\n\n// https://vitejs.dev/config/\nexport default defineConfig({\n  resolve: {\n    alias: {\n      '@': path.resolve(__dirname, 'src')\n    }\n  },\n  plugins: [\n    vue(),\n    AutoImport({\n      imports: ['vue', 'vue-router', VueRouterAutoImports],\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/auto-import.d.ts',\n      eslintrc: {\n        enabled: true\n      }\n    }),\n    Components({\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/components.d.ts'\n    }),\n    createSvgIconsPlugin({\n      // 指定需要缓存的图标文件夹\n      iconDirs: [path.resolve(process.cwd(), 'src/icons')],\n      // 指定symbolId格式\n      symbolId: 'icon-[dir]-[name]'\n    }),\n    VueRouter({\n      /* options */\n      routesFolder: 'src/views',\n      dts: 'src/types/typed-router.d.ts'\n    })\n  ]\n})\n" > vite.config.ts
+# echo "7.AutoRouter-new"
+# echo "7.1 安装依赖包"
+# pnpm add vue-router@4
+# pnpm add unplugin-vue-router -D
+# echo "7.2 写入src/router.ts"
+# echo "import { createRouter, createWebHistory } from 'vue-router/auto'\nimport { routes } from 'vue-router/auto/routes'\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n})\n\nexport default router\n" > src/router.ts
+# echo "7.3 写入src/main.ts"
+# echo "import { createApp } from 'vue'\nimport './style.css'\nimport App from './App.vue'\nimport 'virtual:svg-icons-register'\nimport router from './router'\n\ncreateApp(App).use(router).mount('#app')\n" > src/main.ts
+# echo "7.4 写入vite.config.ts"
+# echo "import { defineConfig } from 'vite'\nimport vue from '@vitejs/plugin-vue'\nimport path from 'path'\nimport AutoImport from 'unplugin-auto-import/vite'\nimport Components from 'unplugin-vue-components/vite'\nimport { ElementPlusResolver } from 'unplugin-vue-components/resolvers'\nimport { createSvgIconsPlugin } from 'vite-plugin-svg-icons'\nimport VueRouter from 'unplugin-vue-router/vite'\nimport { VueRouterAutoImports } from 'unplugin-vue-router'\n\n// https://vitejs.dev/config/\nexport default defineConfig({\n  resolve: {\n    alias: {\n      '@': path.resolve(__dirname, 'src')\n    }\n  },\n  plugins: [\n    vue(),\n    AutoImport({\n      imports: ['vue', 'vue-router', VueRouterAutoImports],\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/auto-import.d.ts',\n      eslintrc: {\n        enabled: true\n      }\n    }),\n    Components({\n      resolvers: [ElementPlusResolver()],\n      dts: 'src/types/components.d.ts'\n    }),\n    createSvgIconsPlugin({\n      // 指定需要缓存的图标文件夹\n      iconDirs: [path.resolve(process.cwd(), 'src/icons')],\n      // 指定symbolId格式\n      symbolId: 'icon-[dir]-[name]'\n    }),\n    VueRouter({\n      /* options */\n      routesFolder: 'src/views',\n      dts: 'src/types/typed-router.d.ts'\n    })\n  ]\n})\n" > vite.config.ts
+
+echo "8.加载Element-plus"
+echo "8.1 安装依赖"
+pnpm add element-plus
+pnpm add @element-plus/icons-vue
+echo "8.2 安装自动加载icon"
+pnpm add unplugin-icons -D
+echo "8.3 添加vite.config.ts配置"
+echo "import { defineConfig } from 'vite'\nimport vue from '@vitejs/plugin-vue'\nimport path from 'path'\nimport AutoImport from 'unplugin-auto-import/vite'\nimport Components from 'unplugin-vue-components/vite'\nimport { createSvgIconsPlugin } from 'vite-plugin-svg-icons'\nimport VueRouter from 'unplugin-vue-router/vite'\nimport { VueRouterAutoImports } from 'unplugin-vue-router'\nimport { ElementPlusResolver } from 'unplugin-vue-components/resolvers'\nimport Icons from 'unplugin-icons/vite'\nimport IconsResolver from 'unplugin-icons/resolver'\n\n// https://vitejs.dev/config/\nexport default defineConfig({\n  resolve: {\n    alias: {\n      '@': path.resolve(__dirname, 'src')\n    }\n  },\n  plugins: [\n    vue(),\n    AutoImport({\n      imports: ['vue', 'vue-router', VueRouterAutoImports],\n      resolvers: [\n        ElementPlusResolver(),\n        // 自动导入图标组件\n        IconsResolver({\n          prefix: 'Icon'\n        })\n      ],\n      dts: 'src/types/auto-import.d.ts',\n      eslintrc: {\n        enabled: true\n      }\n    }),\n    Components({\n      resolvers: [\n        ElementPlusResolver(),\n        // 自动注册图标组件\n        IconsResolver({\n          enabledCollections: ['ep']\n        })\n      ],\n      dts: 'src/types/components.d.ts'\n    }),\n    createSvgIconsPlugin({\n      // 指定需要缓存的图标文件夹\n      iconDirs: [path.resolve(process.cwd(), 'src/icons')],\n      // 指定symbolId格式\n      symbolId: 'icon-[dir]-[name]'\n    }),\n    VueRouter({\n      /* options */\n      routesFolder: 'src/views',\n      dts: 'src/types/typed-router.d.ts'\n    }),\n    Icons({\n      autoInstall: true\n    })\n  ]\n})\n" > vite.config.js
 
 
 # 启动

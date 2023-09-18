@@ -12,10 +12,13 @@
     "format": "prettier --write"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "element-plus": "^2.3.14",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@iconify-json/ep": "^1.1.12",
     "@types/node": "^20.6.0",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
@@ -29,6 +32,7 @@
     "prettier": "^3.0.3",
     "typescript": "^5.0.2",
     "unplugin-auto-import": "^0.16.6",
+    "unplugin-icons": "^0.17.0",
     "unplugin-vue-components": "^0.25.2",
     "unplugin-vue-router": "^0.6.4",
     "vite": "^4.4.5",
