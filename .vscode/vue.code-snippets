@@ -1,0 +1,48 @@
+{
+  // 用户代码片段生成网址
+  // https://snippet-generator.app/
+  "Vue SFC Template": {
+    "prefix": "sfc",
+    "body": [
+      "<script lang=\"ts\">",
+      "export interface ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Props {",
+      "  prop1?: string",
+      "}",
+      "export interface ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Emits {"
+      "  (event: 'event1'): void",
+      "}",
+      "export default {",
+      "  name: '${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}',",
+      "}",
+      "</script>",
+      "<script setup lang=\"ts\">",
+      "withDefaults(defineProps<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Props>(), {})",
+      "defineEmits<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Emits>()",
+      "</script>",
+      "",
+      "<template>",
+      "  <div class=\"${TM_FILENAME_BASE}\">",
+      "    ${TM_FILENAME_BASE}",
+      "  </div>",
+      "</template>",
+      "",
+      "<style scoped lang=\"scss\">",
+      ".${TM_FILENAME_BASE} {",
+      "  color: inherit;",
+      "}",
+      "</style>",
+      ""
+    ],
+    "description": "初始化 vue3 SFC 模板"
+  },
+  "Picsum Template": {
+    "prefix": "picsum",
+    "body": [
+      "https://picsum.photos/200/300?random=1"
+    ],
+    "description": "生成随机图片"
+    // 文字使用
+    // lorem 生成文字
+    // lorem100 生成100个文字
+  }
+}
