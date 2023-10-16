@@ -12,4 +12,6 @@ interface ArticleVO {
 }
 type CreateArticle = Optional<ArticleVO, "author" | "date" | "readCount">;
 
-function createArticle(data: CreateArticle): Promise<ArticleVO> {}
+declare function createArticle(data: CreateArticle): Promise<ArticleVO>;
+
+// function createArticle(data: CreateArticle) {}
