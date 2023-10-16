@@ -12,18 +12,16 @@ function method(key: string) {
 
 
 // typeof
-let s = "hello";
-let n: typeof s;
-// ts 的 typeof 不能带变量，只能带类型
-let msgbox = (x:string) => x;
-// let shouldContinue: typeof msgbox("Are you sure you want to continue?");
-
+let str = '123'
+let s1: typeof str;
 
 // keyof
-type Point = { x: number; y: number };
-type P = keyof Point;
+type Point = {
+  x: number;
+  y: number;
+}
+type P1 = keyof Point
 
-// keyof 是string的时候，会返回number类型，obj[0] === obj['0']
-type Mapish = { [k: string]: boolean };
-type M = keyof Mapish;
+type Point2 = {[key: string]: number}
 
+type P2 = keyof Point2
