@@ -1,0 +1,7 @@
+input  .select {
+  transform: scaleY(0);
+  transition: transform 1s ease;
+}
+input:focus + .select {
+  transform: scaleY(1);
+}
