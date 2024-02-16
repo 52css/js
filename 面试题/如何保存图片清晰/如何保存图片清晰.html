@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 540px;
+        height: 250px;
+        background: -webkit-image-set(
+            url("https://www.baidu.com/img/bd_logo1.png") 1x,
+            url("https://www.baidu.com/img/bd_logo1.png") 2x,
+            url("https://www.baidu.com/img/bd_logo1.png") 3x
+          )
+          no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <img srcset=" https://www.baidu.com/img/bd_logo1.png 1x,
+    https://www.baidu.com/img/bd_logo1.png 2x,
+    https://www.baidu.com/img/bd_logo1.png 3x" alt="百度logo" />
+  </body>
+</html>
