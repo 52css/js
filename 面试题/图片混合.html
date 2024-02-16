@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .mix {
+      width: 540px;
+      height: 250px;
+      background: url('https://www.baidu.com/img/bd_logo1.png') #0ff;
+      background-blend-mode: lighten;
+      position: relative;
+    }
+    .mix::after {
+      content: '';
+      background: url('https://www.baidu.com/img/bd_logo1.png') #f00;
+      background-blend-mode: lighten;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin-left: 10px;
+      mix-blend-mode: darken;
+      animation: shake 30ms infinite;
+    }
+    @keyframes shake {
+      50% {
+        transform: translateX(1%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mix"></div>
+</body>
+</html>
