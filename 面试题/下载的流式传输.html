@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="btn">下载</button>
+  <script>
+    var btn = document.querySelector('.btn');
+    btn.onclick = function() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('get', 'http://localhost:3000/download', true);
+      xhr.responseType = 'blob';
+      xhr.onload = function() {
+        if (this.status === 200) {
+          // 这个有问题，回等待所有的流传递给浏览器内容再下载到本地
+          var blob = this.response;
+          var a = document.createElement('a');
+          var url = window.URL.createObjectURL(blob);
+          var filename = 'test.xlsx';
+          a.href = url;
+          a.download = filename;
+          a.click();
+          window.URL.revokeObjectURL(url);
+        }
+      }
+      xhr.send();
+    }
+  </script>
+
+  <a href="http://localhost:3000/download" download="test.xlsx" class="btn">下载</a>
+  <script>
+    // 1. ajax: token
+    // 2. set-cookie: temp
+    // 3. click a
+  </script>
+</body>
+</html>
