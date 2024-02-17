@@ -1,0 +1,28 @@
+<style>
+  /* 后来input选中属性 */
+  .form-block:focus-within {
+    background-color: #eee;
+  }
+
+  /* span星号 */
+  .label span:has(+input[data-required])::after {
+    content: "*";
+    color: red;
+  }
+
+  /* 首字母下沉 */
+  .label::first-letter {
+    font-size: 4em;
+    font-weight: bold;
+    text-transform: uppercase;
+    float: left;
+    line-height: 1;
+  }
+
+  /* 选中后的样式 */
+  .content:selection {
+    background-color: #f00;
+    color: #fff;
+    text-decoration: underline;
+  }
+</style>
