@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="btn">打折</button>
+  <label>
+    价格： 4599.00
+  </label>
+  <script>
+    function animate(duration, from, to, onProcess) {
+      const speed = (to - from) / duration;
+      const startTime = Date.now();
+      let value = from;
+
+      function _run() {
+        // 让value发生变化
+        const now = Date.now();
+        const time = now - startTime;
+        if (time >= duration) {
+          value = to;
+          onProcess && onProcess(value);
+          return;
+        }
+        value = from + speed * time;
+        onProcess && onProcess(value);
+
+        // 注册下一次的变化
+        requestAnimationFrame(_run);
+      };
+
+      _run();
+    }
+
+    const label = document.querySelector('label');
+    const btn = document.querySelector('.btn');
+    btn.onclick = () => {
+      animate(1000, 4599, 49, (val) => {
+        label.textContent = `价格： ${val.toFixed(2)} `;
+      });
+    }
+  </script>
+</body>
+</html>
