@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .img1 {
+      clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      transition: 0.5s;
+    }
+    .img1:hover {
+      clip-path: polygon(100% 0, 100% 100%, 0% 100%, 0 0);
+    }
+    .img2 {
+      clip-path: ellipse(50% 20% at 50% 50%);
+    }
+    .img2:hover {
+      /* clip-path: circle(30% at 50% 50%); */
+      animation: wink 3s infinite;
+    }
+    @keyframes wink {
+      15% {
+        clip-path: ellipse(50% 1% at 50% 50%);
+      }
+      30% {
+        clip-path: ellipse(50% 19% at 50% 50%);
+      }
+      45% {
+        clip-path: ellipse(50% 1% at 50% 50%);
+      }
+      70% {
+        clip-path: ellipse(50% 40% at 50% 50%);
+      }
+    }
+    .title1 {
+      animation: slideDown 2s forwards;
+    }
+    @keyframes slideDown {
+      0% {
+        transform: translateY(-100%);
+        clip-path: inset(100% 0 0 0);
+      }
+      100% {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <img src="https://picsum.photos/200/200?random=1" class="img1" />
+  <img src="https://picsum.photos/200/200?random=1" class="img2" />
+  <h1 class="title1">this is h1 title</h1>
+</body>
+</html>
