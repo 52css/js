@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="btn">按钮</button>
+    <script>
+      const btn = document.querySelector(".btn");
+      const datas = Array.from({ length: 100000 }, (v, k) => k);
+      btn.onclick = () => {
+        const taskHandler = (data, i) => {
+          const div = document.createElement("div");
+          div.textContent = i;
+          document.body.appendChild(div);
+        };
+        const scheduler = (task) => {
+          setTimeout(() => {
+            const start = Date.now();
+            task(() => Date.now() - start < 50);
+          }, 100)
+        }
+        // performChunk(10000, taskHandler, scheduler);
+        browserPerformChunk(10000, taskHandler)
+      };
+
+      function performChunk(datas, taskHandler, scheduler) {
+        if (typeof datas === 'number') {
+          datas = {
+            length: datas
+          };
+        }
+        if (datas.length == 0) return;
+        let i = 0;
+
+        function _run() {
+          if (i >= datas.length) return;
+
+          scheduler((isGoOn) => {
+            while (isGoOn() && i < datas.length) {
+              taskHandler(datas[i], i);
+              i++;
+            }
+
+            _run();
+          });
+        }
+
+        _run();
+      }
+
+      function browserPerformChunk(datas, taskHandler) {
+        const scheduler = (task) => {
+          requestIdleCallback((idle) => {
+            task(() => idle.timeRemaining() > 0);
+          });
+        };
+
+        performChunk(datas, taskHandler, scheduler);
+      }
+    </script>
+  </body>
+</html>
