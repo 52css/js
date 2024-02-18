@@ -17,3 +17,10 @@ function randomString(len = 6) {
 }
 
 console.log(randomString(6));
+
+
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max + 1 - min) + min);
+}
+
+console.log(randomNumber(1, 10));
