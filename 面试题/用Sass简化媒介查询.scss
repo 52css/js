@@ -1,0 +1,47 @@
+@mixin flex($layout) {
+  display: flex;
+  align-items: $layout;
+  justify-content: $layout;
+  @content;
+}
+
+$breakpoints: (
+  phone: (320px, 480px),
+  pad: (481px, 768px),
+  notebook: (769px, 1024px),
+  desktop: (1025px, 1200px),
+  tv: 1201px
+);
+
+@mixin respondTo($breakname) {
+  $bp: map-get($breakpoints, $breakname);
+  @if type-of($bp) == 'list' {
+    @media (min-width: nth($bp, 1)) and (max-width: nth($bp, 2)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $bp) {
+      @content;
+    }
+  }
+}
+
+.nav {
+  // @include flex(start) {
+  //   gap: 10px;
+  // };
+}
+.header {
+  width: 100%;
+  // @include flex(center) {
+  //   gap: 20px;
+  // };
+
+  @include respondTo('phone') {
+    height: 50px;
+  }
+
+  @include respondTo('pad') {
+    height: 60px;
+  }
+}
