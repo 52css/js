@@ -1,0 +1,9 @@
+@use 'common.scss';
+@use 'var.scss' as b;
+
+$_n: 6; // 私有变量
+
+.foo {
+  color: common.$color;
+  test: b.$test;
+}
