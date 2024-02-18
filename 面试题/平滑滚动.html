@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* CSS 平滑滚动方案 */
+    /* html {
+      scroll-behavior: smooth;
+    } */
+  </style>
+</head>
+<body>
+  <img src="https://picsum.photos/800/600?random=1" alt="">
+  <img src="https://picsum.photos/800/600?random=1" alt="">
+  <img src="https://picsum.photos/800/600?random=1" alt="">
+  <img src="https://picsum.photos/800/600?random=1" alt="">
+  <img src="https://picsum.photos/800/600?random=1" alt="">
+  <img src="https://picsum.photos/800/600?random=1" alt="">
+  <img src="https://picsum.photos/800/600?random=1" alt="">
+  <button class="btn">回到顶部</button>
+  <script>
+    const btn = document.querySelector('.btn');
+    btn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html>
