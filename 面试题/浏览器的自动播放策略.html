@@ -9,19 +9,36 @@
   <div class="vdo-container">
     <video src="./test.mp4"></video>
     <div class="modal">
-      <button class="btn">开始播放</button>
+      <button class="btn">打开声音</button>
     </div>
   </div>
   <script>
     const vdo = document.querySelector('video');
     const modal = document.querySelector('.modal');
     const btn = document.querySelector('.btn');
-    async function play() {
-      try {
-        await vdo.play();
+    // async function play() {
+    //   try {
+    //     await vdo.play();
+    //     modal.style.display = 'none';
+    //     btn.removeEventListener('click', play);
+    //   } catch (ex) {
+    //     modal.style.display = 'flex';
+    //     btn.addEventListener('click', play);
+    //   }
+    // }
+    // play();
+
+    function play() {
+      vdo.muted = true; // 静音
+      vdo.play();
+      const ctx = new AudioContext();
+      const canAutoPlay = ctx.state === 'running';
+      ctx.close();
+      if (canAutoPlay) {
+        vdo.muted = false;
         modal.style.display = 'none';
         btn.removeEventListener('click', play);
-      } catch (ex) {
+      } else {
         modal.style.display = 'flex';
         btn.addEventListener('click', play);
       }
