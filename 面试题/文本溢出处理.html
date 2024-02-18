@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .single-line {
+      width: 200px;
+      height: 30px;
+      line-height: 30px;
+      margin-bottom: 90px;
+      color: #f40;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .multi-line {
+      width: 200px;
+      height: 150px;
+      line-height: 30px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <p class="single-line">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat porro adipisci eveniet, recusandae velit aperiam tempore necessitatibus delectus. Doloribus cum, quos sed nulla minima ducimus eum fugiat alias dolores natus!</p>
+  <p class="multi-line">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat porro adipisci eveniet, recusandae velit aperiam tempore necessitatibus delectus. Doloribus cum, quos sed nulla minima ducimus eum fugiat alias dolores natus!</p>
+</body>
+</html>
