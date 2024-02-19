@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+    }
+    .card {
+      width: 100px;
+      height: 100px;
+      margin: 20px auto;
+      perspective: 500px;
+      display: flex;
+      position: relative;
+    }
+    .card .face {
+      width: 100px;
+      height: 100px;
+      transition: 0.5s;
+      position: absolute;
+      inset: 0;
+    }
+    .card .back {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      padding: 0;
+      width: 100px;
+      height: 100px;
+      transition: 0.5s;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card:hover .face {
+      transform: rotateY(-180deg);;
+    }
+    .back {
+      transform: rotateY(180deg);
+    }
+    .card:hover .back {
+      transform: rotateY(0deg);
+    }
+
+    .face, .back {
+      backface-visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://picsum.photos/100/100?random=1" alt="" class="face">
+    <p class="back">
+      <span>Raspberry</span>
+    </p>
+  </div>
+</body>
+</html>
