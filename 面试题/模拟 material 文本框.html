@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .form-item {
+        position: relative;
+        margin: 50px auto;
+        width: 200px;
+      }
+      .form-item input {
+        border: none;
+        height: 40px;
+        width: 100%;
+      }
+      .form-item .bar {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 1px;
+        background-color: red;
+        width: 0;
+        transition: 0.3s;
+        transform-origin: top center;
+      }
+      .form-item label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: 0.3s;
+      }
+      .form-item input:focus ~ .bar {
+        width: 100%;
+      }
+      .form-item input:valid ~ label,
+      .form-item input:focus ~ label {
+        color: #5264ae;
+        transform: translateY(-40px);
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-item">
+      <input required type="text" id="username" />
+      <span class="bar"></span>
+      <label for="username">User Name</label>
+    </div>
+  </body>
+</html>
