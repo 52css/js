@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>动画</button>
+  <div class="list">
+    <div class="list-item">1</div>
+    <div class="list-item">2</div>
+    <div class="list-item">3</div>
+    <div class="list-item">4</div>
+    <div class="list-item">5</div>
+  </div>
+  <script>
+    const btn = document.querySelector('button');
+    const list = document.querySelector('.list');
+    const firstItem = document.querySelector('.list-item:first-child');
+    const lastItem = document.querySelector('.list-item:last-child');
+
+    function getLocation() {
+      const rect = firstItem.getBoundingClientRect();
+      return rect.top;
+    }
+
+    const start = getLocation();
+    console.log('first:', start);
+
+    btn.onclick = () => {
+      list.insertBefore(firstItem, null);
+      const end = getLocation();
+      console.log('Last:', end);
+      const dis = start - end;
+      firstItem.style.transform = `translateY(${dis}px)`;
+      console.log('Invert:', dis);
+      raf(() => {
+        firstItem.style.transition = 'transform 1s';
+        firstItem.style.removeProperty('transform');
+        console.log('play');
+      });
+
+      function raf(callback) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(callback);
+        })
+      }
+    }
+  </script>
+</body>
+</html>
