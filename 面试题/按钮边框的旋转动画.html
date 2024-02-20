@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      padding: 20px;
+    }
+    button {
+      width: 160px;
+      height: 80px;
+      color: #0ebeff;
+      font-size: 24px;
+      background-color: #000;
+      border: none;
+      outline: none;
+      z-index: 1;
+      border-radius: 10px;
+      cursor: pointer;
+      /* outline: 4px solid #fff; */
+      position: relative;
+      overflow: hidden;
+    }
+    button::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: #f40;
+      z-index: -2;
+      left: 50%;
+      top: 50%;
+      transform-origin: left top;
+      animation: rotation 1s linear infinite;
+    }
+    button::after {
+      content: '';
+      position: absolute;
+      --w: 2px;
+      width: calc(100% - var(--w) * 2 );
+      height: calc(100% - var(--w) * 2 );
+      left: var(--w);
+      top: var(--w);
+      background-color: #000;
+      z-index: -1;
+      border-radius: inherit;
+    }
+    @keyframes rotation {
+      to {
+        transform: rotate(1turn);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button>边框按钮</button>
+</body>
+</html>
