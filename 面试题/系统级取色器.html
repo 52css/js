@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>取色</button>
+    <label></label>
+    <div class="box" style="width: 100px; height: 100px"></div>
+    <script>
+      const btn = document.querySelector("button");
+      const box = document.querySelector(".box");
+      const label = document.querySelector("label");
+      btn.onclick = async function () {
+        const dropper = new EyeDropper();
+        try {
+          const result = await dropper.open();
+          console.log(result);
+          box.style.backgroundColor = label.textContext = result.sRGBHex;
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    </script>
+  </body>
+</html>
