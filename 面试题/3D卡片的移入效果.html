@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .card {
+      width: 200px;
+      height: 300px;
+      margin: 0 50px;
+      transform: translateY(-50%);
+      position: relative;
+    }
+    .card .cover, .card .title, .card .hero {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transition: 0.5s;
+    }
+    .card .cover {
+      z-index: 1;
+      background-color: red;
+    }
+    .card:hover .cover {
+      box-shadow: 0 35px 35px -8px rgba(0, 0, 0, 0.5);
+      transform: perspective(500px) rotateX(25deg);
+    }
+    .card .title {
+      bottom: 0;
+      z-index: 3;
+    }
+    .card:hover .title {
+      transform: perspective(500px) translate3d(0, -25px, 50px);
+    }
+    .card .hero {
+      z-index: 2;
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="cover"></div>
+    <div class="title">title</div>
+    <div class="hero"></div>
+  </div>
+</body>
+</html>
