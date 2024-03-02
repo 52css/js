@@ -1,0 +1,38 @@
+{
+    "root": {
+        "data": {
+            "id": "czixs4pf8wo0",
+            "created": 1709349371797,
+            "text": "说说你对双向绑定的理解"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "czixsdgrtog0",
+                    "created": 1709349390865,
+                    "text": "什么是双向数据绑定"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "czixskuhbzk0",
+                    "created": 1709349406931,
+                    "text": "双向绑定的原理"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "czixspqgir40",
+                    "created": 1709349417572,
+                    "text": "如何实现双向绑定"
+                },
+                "children": []
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

@@ -1,0 +1,54 @@
+{
+    "root": {
+        "data": {
+            "id": "czixudkm3ds0",
+            "created": 1709349547825,
+            "text": "说说你对vue的理解"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "czixunn9ffk0",
+                    "created": 1709349569753,
+                    "text": "web 发展历程"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "czixus196k80",
+                    "created": 1709349579307,
+                    "text": "vue是什么"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "czixuxqx42w0",
+                    "created": 1709349591742,
+                    "text": "vue的核心"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "czixv162o4g0",
+                    "created": 1709349599189,
+                    "text": "vue和jquery区别"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "czixv8644nk0",
+                    "created": 1709349614429,
+                    "text": "vue和react区别"
+                },
+                "children": []
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
