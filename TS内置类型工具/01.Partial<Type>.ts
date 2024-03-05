@@ -14,4 +14,4 @@ const newUser = updateUser(user, { address: "北京" });
 
 type MyPartial<T> = {
   [P in keyof T]?: T[P];
-};
+}
