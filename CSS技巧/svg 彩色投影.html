@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, 'BlinkMacSystemFont', sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background: aliceblue;
+      }
+      .con {
+        display: flex;
+      }
+      .wrap {
+        position: relative;
+        display: flex;
+        width: 150px;
+        height: 150px;
+        justify-content: center;
+        align-items: center;
+      }
+      .svg .wrap {
+        filter: url('#natural-shadow-filter');
+      }
+      .css .wrap::before {
+        content: '';
+        position: absolute;
+        background: var(--bg) 0 / cover;
+        width: 80px;
+        height: 107px;
+        filter: blur(12px);
+        transform: translate(10px, 10px);
+      }
+      .cover {
+        position: relative;
+        width: 80px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0">
+      <filter id="natural-shadow-filter">
+        <feOffset dx="10" dy="10" />
+        <feGaussianBlur stdDeviation="12" />
+        <feMerge>
+          <feMergeNode />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </svg>
+    <h3>CSS</h3>
+    <div class="con css">
+      <div
+        class="wrap"
+        style="
+          --bg: url('https://bookcover.yuewen.com/qdbimg/349573/1036370336/180.webp');
+        "
+      >
+        <img
+          class="cover"
+          src="https://bookcover.yuewen.com/qdbimg/349573/1036370336/180.webp"
+        />
+      </div>
+      <div
+        class="wrap"
+        style="
+          --bg: url('https://bookcover.yuewen.com/qdbimg/349573/1010868264/180.webp');
+        "
+      >
+        <img
+          class="cover"
+          src="https://bookcover.yuewen.com/qdbimg/349573/1010868264/180.webp"
+        />
+      </div>
+      <div
+        class="wrap"
+        style="
+          --bg: url('https://bookcover.yuewen.com/qdbimg/349573/1033991975/180.webp');
+        "
+      >
+        <img
+          class="cover"
+          src="https://bookcover.yuewen.com/qdbimg/349573/1033991975/180.webp"
+        />
+      </div>
+    </div>
+    <h3>SVG</h3>
+    <div class="con svg">
+      <div class="wrap">
+        <img
+          class="cover"
+          src="https://bookcover.yuewen.com/qdbimg/349573/1036370336/180.webp"
+        />
+      </div>
+      <div class="wrap">
+        <img
+          class="cover"
+          src="https://bookcover.yuewen.com/qdbimg/349573/1010868264/180.webp"
+        />
+      </div>
+      <div class="wrap">
+        <img
+          class="cover"
+          src="https://bookcover.yuewen.com/qdbimg/349573/1033991975/180.webp"
+        />
+      </div>
+    </div>
+  </body>
+</html>

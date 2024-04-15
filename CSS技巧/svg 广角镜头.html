@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, "BlinkMacSystemFont", sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background: aliceblue;
+        gap: 50px;
+        --icon: url("data:image/svg+xml,%3Csvg width='100%' height='100%' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M30 2a2 2 0 1 0-4 0v8c0 8.837-7.163 16-16 16H2a2 2 0 1 0 0 4 2 2 0 1 0 0 4h8c8.837 0 16 7.163 16 16v8a2 2 0 1 0 4 0 2 2 0 1 0 4 0v-8c0-8.837 7.163-16 16-16h8a2 2 0 1 0 0-4 2 2 0 1 0 0-4h-8c-8.837 0-16-7.163-16-16V2a2 2 0 1 0-4 0zm20 28c-11.046 0-20 8.954-20 20 0-11.046-8.954-20-20-20 11.046 0 20-8.954 20-20 0 11.046 8.954 20 20 20z' fill='%23FF336F'/%3E%3C/svg%3E");
+      }
+      div {
+        background: var(--icon) #eee;
+        background-position: -30px -30px;
+        transition: 3s;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 200px; height: 100px"></div>
+    <div style="width: 200px; height: 150px"></div>
+  </body>
+</html>

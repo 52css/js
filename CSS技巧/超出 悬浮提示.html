@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, 'BlinkMacSystemFont', sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background: #ffe8a3;
+        gap: 20px;
+        accent-color: #9747ff;
+      }
+      .con {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        width: 300px;
+        outline: 2px solid #9747ff;
+        /* overflow: hidden; */
+        resize: horizontal;
+      }
+
+      /* 以下为本demo */
+      .txt {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding: 8px;
+        outline: 1px dashed #9747ff;
+        font-family: cursive;
+        border-radius: 4px;
+        --trunk: false;
+        animation: check 1s;
+        animation-timeline: scroll(x self);
+      }
+      .wrap {
+        position: relative;
+      }
+      @keyframes check {
+        from,
+        to {
+          --trunk: true;
+        }
+      }
+      @keyframes move {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      @container style(--trunk: true) {
+        .txt::after {
+          content: attr(data-title);
+          position: absolute;
+          top: 0;
+          width: fit-content;
+          left: 50%;
+          margin: auto;
+          transform: translate(-50%, -100%);
+          background-color: rgba(0, 0, 0, 0.6);
+          padding: 0.3em 1em;
+          border-radius: 4px;
+          color: #fff;
+          opacity: 0;
+          visibility: hidden;
+          transition: 0.2s 0.1s;
+        }
+        .txt:hover::after {
+          cursor: default;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h3>CSS 文本超出时显示 tooltips</h3>
+    <div class="con">
+      <div class="wrap">
+        <div class="txt" data-title="这是一段可以自动出现tooltip的文本">
+          这是一段可以自动出现tooltip的文本
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="txt" data-title="较少的文本不会出现">
+          较少的文本不会出现
+        </div>
+      </div>
+      <div class="wrap">
+        <div
+          class="txt"
+          data-title="只有字数多的时候才出现tooltip，而且还会有省略号"
+        >
+          只有字数多的时候才出现tooltip，而且还会有省略号
+        </div>
+      </div>
+    </div>
+    <input
+      type="range"
+      min="200"
+      value="300"
+      max="800"
+      oninput="this.previousElementSibling.style.width = this.value + 'px'"
+    />
+  </body>
+</html>

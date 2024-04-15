@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, 'BlinkMacSystemFont', sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        /* background: #FFE8A3; */
+        gap: 20px;
+        background-color: #111;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      .wrap {
+        position: relative;
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        height: 400px;
+        padding: 20px;
+        /* outline: 1px dashed #9747FF; */
+        border-radius: 4px;
+        overflow: auto;
+        gap: 20px;
+        background-color: #9747ff;
+        scroll-behavior: smooth;
+        border-radius: 30px;
+        font-family: cursive;
+        scroll-timeline: --scroller;
+        scroll-snap-type: y mandatory;
+        scroll-padding: 20px;
+        overscroll-behavior: none;
+      }
+      .list::before,
+      .list::after {
+        content: '';
+        height: 50px;
+        flex-shrink: 0;
+      }
+      .item:first-child {
+        scroll-snap-align: start;
+      }
+      .item:nth-last-child(2) {
+        scroll-snap-align: end;
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 120px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background-color: #ffcd29;
+        color: #111;
+        font-size: 40px;
+        scroll-snap-align: center;
+      }
+
+      .scroller {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        pointer-events: none;
+        height: -webkit-fill-available;
+        margin: 5px;
+      }
+      .scroller_thumb {
+        stroke: hsl(0 0% 100% / 0.5);
+        stroke-dasharray: 80 450;
+        stroke-width: 8px;
+        animation: scroll both 5s linear;
+        animation-timeline: --scroller;
+      }
+      @keyframes scroll {
+        0% {
+          stroke-dashoffset: 75;
+        }
+        100% {
+          stroke-dashoffset: -445;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="list">
+        <div class="item" id="item_1">1</div>
+        <div class="item" id="item_2">2</div>
+        <div class="item" id="item_3">3</div>
+        <div class="item" id="item_4">4</div>
+        <div class="item" id="item_5">5</div>
+        <div class="item" id="item_6">6</div>
+        <div class="item" id="item_7">7</div>
+        <svg
+          class="scroller"
+          viewBox="0 0 31 433"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class="scroller_thumb"
+            d="M4 4C9.96737 4 15.6903 6.37053 19.9099 10.5901C24.1295 14.8097 26.5 20.5326 26.5 26.5V406.5C26.5 412.467 24.1295 418.19 19.9099 422.41C15.6903 426.629 9.96737 429 4 429"
+            stroke="black"
+            stroke-width="8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+  </body>
+</html>
